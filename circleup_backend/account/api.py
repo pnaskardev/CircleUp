@@ -30,3 +30,11 @@ def signup(request):
         message=form.errors
 
     return JsonResponse({'status':message})
+
+@api_view(['GET'])
+def me(request):
+    return JsonResponse({
+        'id':request.user.id,
+        'name':request.user.name,
+        'email':request.user.email,
+    })
