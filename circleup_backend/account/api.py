@@ -29,7 +29,8 @@ def signup(request):
     else: 
         message=form.errors
 
-    return JsonResponse({'status':message})
+    # return JsonResponse({'status':message})
+    return JsonResponse({'status':message,'id':form.instance.id})
 
 @api_view(['GET'])
 def me(request):
