@@ -36,7 +36,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-AUTH_USER_MODEL='account.User'
+AUTH_USER_MODEL = 'account.User'
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
@@ -80,7 +80,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware', # CORS
+    'corsheaders.middleware.CorsMiddleware',  # CORS
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -107,6 +107,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'circleup_backend.wsgi.application'
+ASGI_APPLICATION = 'circleup_backend.asgi.application'
 
 
 # Database
@@ -133,11 +134,11 @@ WSGI_APPLICATION = 'circleup_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DATABASE_NAME'), # 'circleup
-        'USER':os.environ.get('DATABASE_USER'),
-        'PASSWORD':os.environ.get('DATABASE_PASS'),
-        'HOST':os.environ.get('DATABASE_HOST'),
-        'PORT':os.environ.get('DATABASE_PORT'),
+        'NAME': os.environ.get('DATABASE_NAME'),  # 'circleup
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASS'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': os.environ.get('DATABASE_PORT'),
     }
 }
 
