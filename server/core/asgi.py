@@ -17,7 +17,7 @@ from channels.security.websocket import AllowedHostsOriginValidator
 
 from chat import routing
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'circleup_backend.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 
 django_asgi_application = get_asgi_application()
 
