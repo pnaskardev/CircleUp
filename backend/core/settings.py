@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+AUTH_USER_MODEL = 'account.User'
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173"
 ]
@@ -60,6 +62,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'rest_framework',
     'rest_framework_simplejwt',
+    'account',
 ]
 
 MIDDLEWARE = [
