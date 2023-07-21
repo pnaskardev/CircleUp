@@ -34,6 +34,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=255)
+    password = models.CharField(max_length=255)
     avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
 
     is_active = models.BooleanField(default=True)
@@ -47,4 +48,4 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['username', 'password']
