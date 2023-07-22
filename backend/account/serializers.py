@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'password_1']
+        fields = ['id', 'username', 'email', 'password', 'password_1']
         extra_kwargs = {'password': {'write_only': True}}
 
     def validate(self, attrs):
@@ -27,8 +27,8 @@ class UserSerializer(serializers.ModelSerializer):
         # print(validated_data)
         # return super().create(validated_data)
         password = validated_data.pop('password')
-        user=super().create(validated_data)
+        user = super().create(validated_data)
         if password is not None:
             user.set_password(password)
         user.save()
-        return user 
+        return user

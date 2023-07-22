@@ -5,7 +5,7 @@
         <div class="space-y-4">
             <div class="flex items-center justify-between">
                 <p class="text-xs">
-                    <strong>#codewithstein</strong><br>
+                    <strong>#Priyanshu</strong><br>
                     <span class="text-gray-500">180 posts</span>
                 </p>
 
@@ -14,7 +14,7 @@
 
             <div class="flex items-center justify-between">
                 <p class="text-xs">
-                    <strong>#codewithstein</strong><br>
+                    <strong>#Priyanshu</strong><br>
                     <span class="text-gray-500">180 posts</span>
                 </p>
 
@@ -23,7 +23,7 @@
 
             <div class="flex items-center justify-between">
                 <p class="text-xs">
-                    <strong>#codewithstein</strong><br>
+                    <strong>#Priyanshu</strong><br>
                     <span class="text-gray-500">180 posts</span>
                 </p>
 
@@ -32,7 +32,7 @@
 
             <div class="flex items-center justify-between">
                 <p class="text-xs">
-                    <strong>#codewithstein</strong><br>
+                    <strong>#Priyanshu</strong><br>
                     <span class="text-gray-500">180 posts</span>
                 </p>
 

@@ -96,7 +96,7 @@ export default {
                     .get('/api/me/')
                     .then(response => {
                         this.userStore.setUserInfo(response.data)
-
+                        console.log(response.data)
                         this.$router.push('/feed')
                     })
                     .catch(error => {

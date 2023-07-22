@@ -1,5 +1,5 @@
 import uuid
-
+from django.utils.timesince import timesince
 from django.db import models
 
 from account.models import User
@@ -24,3 +24,9 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(
         User, related_name='posts', on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('-created_at',)
+
+    def created_at_formatted(self):
+        return timesince(self.created_at)
