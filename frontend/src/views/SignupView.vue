@@ -19,8 +19,8 @@
             <div class="p-12 bg-white border border-gray-200 rounded-lg">
                 <form class="space-y-6" v-on:submit.prevent="submitForm">
                     <div>
-                        <label>Name</label><br>
-                        <input type="text" v-model="form.name" placeholder="Your full name" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
+                        <label>Username</label><br>
+                        <input type="text" v-model="form.username" placeholder="Your full name" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
                     </div>
 
                     <div>
@@ -30,12 +30,12 @@
 
                     <div>
                         <label>Password</label><br>
-                        <input type="password" v-model="form.password1" placeholder="Your password" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
+                        <input type="password" v-model="form.password" placeholder="Your password" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
                     </div>
 
                     <div>
                         <label>Repeat password</label><br>
-                        <input type="password" v-model="form.password2" placeholder="Repeat your password" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
+                        <input type="password" v-model="form.password_1" placeholder="Repeat your password" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
                     </div>
 
                     <template v-if="errors.length > 0">
@@ -71,9 +71,9 @@ export default {
         return {
             form: {
                 email: '',
-                name: '',
-                password1: '',
-                password2: ''
+                username: '',
+                password: '',
+                password_1: ''
             },
             errors: [],
         }
@@ -87,15 +87,15 @@ export default {
                 this.errors.push('Your e-mail is missing')
             }
 
-            if (this.form.name === '') {
+            if (this.form.username === '') {
                 this.errors.push('Your name is missing')
             }
 
-            if (this.form.password1 === '') {
+            if (this.form.password === '') {
                 this.errors.push('Your password is missing')
             }
 
-            if (this.form.password1 !== this.form.password2) {
+            if (this.form.password_1 !== this.form.password_1) {
                 this.errors.push('The password does not match')
             }
 
@@ -103,7 +103,7 @@ export default {
                 axios
                     .post('/api/register/', this.form)
                     .then(response => {
-                        if (response.data.message === 'success') {
+                        if (response.status === 201) {
                             this.toastStore.showToast(5000, 'The user is registered. Please log in', 'bg-emerald-500')
 
                             this.form.email = ''
