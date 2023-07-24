@@ -17,7 +17,15 @@ class Posts(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
+        user_ids = [request.user.id]
+
+        for user in request.user.friends.all():
+            user_ids.append(user.id)
+
+        posts = Post.objects.filter(created_by__in=list(user_ids))
+        serializer = PostSerializer(posts, many=True)
+        # return super().list(request, *args, **kwargs)
+        return JsonResponse(serializer.data, safe=False)
 
     def create(self, request, *args, **kwargs):
         data = request.data

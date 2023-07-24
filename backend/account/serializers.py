@@ -1,7 +1,7 @@
 from operator import itemgetter
 from rest_framework import serializers
 
-from . models import User
+from . models import User, FriendshipRequest
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -10,7 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'password_1']
+        fields = ['id', 'username', 'email',
+                  'password', 'password_1', 'friends_count']
         extra_kwargs = {'password': {'write_only': True}}
 
     def validate(self, attrs):
@@ -32,3 +33,11 @@ class UserSerializer(serializers.ModelSerializer):
             user.set_password(password)
         user.save()
         return user
+
+
+class FriendshipRequestSerializer(serializers.ModelSerializer):
+    created_by = UserSerializer(read_only=True)
+
+    class Meta:
+        model = FriendshipRequest
+        fields = ('id', 'created_by',)
