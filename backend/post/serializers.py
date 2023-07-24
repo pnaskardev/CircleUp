@@ -9,8 +9,8 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Post
-        fields = ['id', 'body', 'created_by', 'created_at_formatted']
-
+        fields = ['id', 'body', 'likes_count',
+                  'created_by', 'created_at_formatted']
 
     def create(self, validated_data):
         user = self.context.get('request').user
