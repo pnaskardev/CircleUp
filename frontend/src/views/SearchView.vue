@@ -22,28 +22,28 @@
                     v-for="user in users"
                     v-bind:key="user.id"
                 >
-                    <img :src="user.get_avatar" class="mb-6 rounded-full">
+                    <img src="https://i.pravatar.cc/300?img=70" class="mb-6 rounded-full">
                 
                     <p>
                         <strong>
-                            <RouterLink :to="{name: 'profile', params:{'id': user.id}}">{{ user.name }}</RouterLink>
+                            <RouterLink :to="{name: 'profile', params:{'id': user.id}}">{{ user.username }}</RouterLink>
                         </strong>
                     </p>
 
                     <div class="mt-6 flex space-x-8 justify-around">
-                        <p class="text-xs text-gray-500">{{ user.friends_count }} friends</p>
-                        <p class="text-xs text-gray-500">{{ user.posts_count }} posts</p>
+                        <p class="text-xs text-gray-500">{{ user.friends_count }}</p>
+                        <p class="text-xs text-gray-500">120 posts</p>
                     </div>
                 </div>
             </div>
 
-            <div 
+            <!-- <div 
                 class="p-4 bg-white border border-gray-200 rounded-lg"
                 v-for="post in posts"
                 v-bind:key="post.id"
             >
                 <FeedItem v-bind:post="post" />
-            </div>
+            </div> -->
         </div>
 
         <div class="main-right col-span-1 space-y-4">
@@ -82,14 +82,12 @@ export default {
             console.log('submitForm', this.query)
 
             axios
-                .post('/api/search/', {
-                    query: this.query
-                })
+                .get(`/api/search/users?search=${this.query}`)
                 .then(response => {
                     console.log('response:', response.data)
 
-                    this.users = response.data.users
-                    this.posts = response.data.posts
+                    this.users = response.data
+                    // this.posts = response.data.posts
                 })
                 .catch(error => {
                     console.log('error:', error)

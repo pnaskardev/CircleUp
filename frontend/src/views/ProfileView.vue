@@ -2,13 +2,14 @@
     <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
         <div class="main-left col-span-1">
             <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
-                <img :src="user.get_avatar" class="mb-6 rounded-full">
+                <img src="https://i.pravatar.cc/300?img=70" class="mb-6 rounded-full">
                 
-                <p><strong>{{ user.name }}</strong></p>
+                <p><strong>{{ user.username }}</strong></p>
 
-                <div class="mt-6 flex space-x-8 justify-around" v-if="user.id">
+                <div class="mt-6 flex space-x-8 justify-around">
+                    <!-- <RouterLink :to="{name: 'friends', params: {id: user.id}}" class="text-xs text-gray-500">{{ user.friends_count }} friends</RouterLink> -->
                     <RouterLink :to="{name: 'friends', params: {id: user.id}}" class="text-xs text-gray-500">{{ user.friends_count }} friends</RouterLink>
-                    <p class="text-xs text-gray-500">{{ user.posts_count }} posts</p>
+                    <p class="text-xs text-gray-500">120 posts</p>
                 </div>
 
                 <div class="mt-6">
@@ -19,22 +20,6 @@
                     >
                         Send friendship request
                     </button>
-
-                    <button 
-                        class="inline-block mt-4 py-4 px-3 bg-purple-600 text-xs text-white rounded-lg" 
-                        @click="sendDirectMessage"
-                        v-if="userStore.user.id !== user.id"
-                    >
-                        Send direct message
-                    </button>
-
-                    <RouterLink 
-                        class="inline-block mr-2 py-4 px-3 bg-purple-600 text-xs text-white rounded-lg" 
-                        to="/profile/edit"
-                        v-if="userStore.user.id === user.id"
-                    >
-                        Edit profile
-                    </RouterLink>
 
                     <button 
                         class="inline-block py-4 px-3 bg-red-600 text-xs text-white rounded-lg" 
@@ -55,17 +40,10 @@
                 <form v-on:submit.prevent="submitForm" method="post">
                     <div class="p-4">  
                         <textarea v-model="body" class="p-4 w-full bg-gray-100 rounded-lg" placeholder="What are you thinking about?"></textarea>
-
-                        <div id="preview" v-if="url">
-                            <img :src="url" class="w-[100px] mt-3 rounded-xl" />
-                        </div>
                     </div>
 
                     <div class="p-4 border-t border-gray-100 flex justify-between">
-                        <label class="inline-block py-4 px-6 bg-gray-600 text-white rounded-lg">
-                            <input type="file" ref="file" @change="onFileChange">
-                            Attach image
-                        </label>
+                        <a href="#" class="inline-block py-4 px-6 bg-gray-600 text-white rounded-lg">Attach image</a>
 
                         <button class="inline-block py-4 px-6 bg-purple-600 text-white rounded-lg">Post</button>
                     </div>
@@ -88,19 +66,6 @@
         </div>
     </div>
 </template>
-
-<style>
-input[type="file"] {
-    display: none;
-}
-
-.custom-file-upload {
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
-}
-</style>
 
 <script>
 import axios from 'axios'
@@ -133,10 +98,9 @@ export default {
         return {
             posts: [],
             user: {
-                id: ''
+                id: null
             },
             body: '',
-            url: null,
         }
     },
 
@@ -155,26 +119,6 @@ export default {
     },
 
     methods: {
-        onFileChange(e) {
-            const file = e.target.files[0];
-            this.url = URL.createObjectURL(file);
-        },
-
-        sendDirectMessage() {
-            console.log('sendDirectMessage')
-
-            axios
-                .get(`/api/chat/${this.$route.params.id}/get-or-create/`)
-                .then(response => {
-                    console.log(response.data)
-
-                    this.$router.push('/chat')
-                })
-                .catch(error => {
-                    console.log('error', error)
-                })
-        },
-
         sendFriendshipRequest() {
             axios
                 .post(`/api/friends/${this.$route.params.id}/request/`)
@@ -209,24 +153,15 @@ export default {
         submitForm() {
             console.log('submitForm', this.body)
 
-            let formData = new FormData()
-            formData.append('image', this.$refs.file.files[0])
-            formData.append('body', this.body)
-
             axios
-                .post('/api/posts/create/', formData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    }
+                .post('/api/posts/create/', {
+                    'body': this.body
                 })
                 .then(response => {
                     console.log('data', response.data)
 
                     this.posts.unshift(response.data)
                     this.body = ''
-                    this.$refs.file.value = null
-                    this.url = null
-                    this.user.posts_count += 1
                 })
                 .catch(error => {
                     console.log('error', error)

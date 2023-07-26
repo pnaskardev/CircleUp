@@ -2,13 +2,13 @@
     <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
         <div class="main-left col-span-1">
             <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
-                <img :src="user.get_avatar" class="mb-6 rounded-full">
+                <img src="https://i.pravatar.cc/300?img=70" class="mb-6 rounded-full">
                 
-                <p><strong>{{ user.name }}</strong></p>
+                <p><strong>{{ user.username }}</strong></p>
 
                 <div class="mt-6 flex space-x-8 justify-around">
                     <p class="text-xs text-gray-500">{{ user.friends_count }} friends</p>
-                    <p class="text-xs text-gray-500">{{ user.posts_count }} posts</p>
+                    <p class="text-xs text-gray-500">120 posts</p>
                 </div>
             </div>
         </div>
@@ -25,17 +25,17 @@
                     v-for="friendshipRequest in friendshipRequests"
                     v-bind:key="friendshipRequest.id"
                 >
-                    <img :src="friendshipRequest.created_by.get_avatar" class="mb-6 mx-auto rounded-full">
+                    <img src="https://i.pravatar.cc/100?img=70" class="mb-6 mx-auto rounded-full">
                 
                     <p>
                         <strong>
-                            <RouterLink :to="{name: 'profile', params:{'id': friendshipRequest.created_by.id}}">{{ friendshipRequest.created_by.name }}</RouterLink>
+                            <RouterLink :to="{username: 'profile', params:{'id': friendshipRequest.created_by.id}}">{{ friendshipRequest.created_by.name }}</RouterLink>
                         </strong>
                     </p>
 
                     <div class="mt-6 flex space-x-8 justify-around">
                         <p class="text-xs text-gray-500">{{ user.friends_count }} friends</p>
-                        <p class="text-xs text-gray-500">{{ user.posts_count }} posts</p>
+                        <p class="text-xs text-gray-500">120 posts</p>
                     </div>
 
                     <div class="mt-6 space-x-4">
@@ -56,17 +56,17 @@
                     v-for="user in friends"
                     v-bind:key="user.id"
                 >
-                    <img :src="user.get_avatar" class="mb-6 rounded-full">
+                    <img src="https://i.pravatar.cc/300?img=70" class="mb-6 rounded-full">
                 
                     <p>
                         <strong>
-                            <RouterLink :to="{name: 'profile', params:{'id': user.id}}">{{ user.name }}</RouterLink>
+                            <RouterLink :to="{username: 'profile', params:{'id': user.id}}">{{ user.username }}</RouterLink>
                         </strong>
                     </p>
 
                     <div class="mt-6 flex space-x-8 justify-around">
                         <p class="text-xs text-gray-500">{{ user.friends_count }} friends</p>
-                        <p class="text-xs text-gray-500">{{ user.posts_count }} posts</p>
+                        <p class="text-xs text-gray-500">120 posts</p>
                     </div>
                 </div>
             </div>
